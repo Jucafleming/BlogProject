@@ -4,6 +4,7 @@ using BlogProject.API.Models.DTO;
 using BlogProject.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace BlogProject.API.Controllers
@@ -109,7 +110,26 @@ namespace BlogProject.API.Controllers
 
             return Ok(response);
         }
-        
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
+        {
+            var category = await categoryRepository.DeleteAsync(id);
+            if (category is null)
+            {
+                return NotFound();
+            }
+
+            var response = new CategoryDto {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            };
+
+            return Ok(response);
+        }
+
 
     }
 }
