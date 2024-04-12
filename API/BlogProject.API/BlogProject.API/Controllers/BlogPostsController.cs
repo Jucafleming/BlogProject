@@ -1,4 +1,5 @@
-﻿using BlogProject.API.Models.Domain;
+﻿using Azure.Core;
+using BlogProject.API.Models.Domain;
 using BlogProject.API.Models.DTO;
 using BlogProject.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
@@ -49,6 +50,31 @@ namespace BlogProject.API.Controllers
                 UrlHandle = request.UrlHandle,
             };
 
+            return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllBlogPosts()
+        {
+           var blogPosts =  await blogPostRepository.GetAllAsync();
+
+            var response = new List<BlogPostDto>();
+            foreach(var blogPost in blogPosts)
+            {
+                response.Add(new BlogPostDto
+                {
+                    Id = blogPost.Id,
+                    Author = blogPost.Author,
+                    Content = blogPost.Content,
+                    FeatureImageUrl = blogPost.FeatureImageUrl,
+                    IsVisible = blogPost.IsVisible,
+                    PublishDate = blogPost.PublishDate,
+                    ShortDescription = blogPost.ShortDescription,
+                    Title = blogPost.Title,
+                    UrlHandle = blogPost.UrlHandle
+                });
+              
+            }
             return Ok(response);
         }
     }

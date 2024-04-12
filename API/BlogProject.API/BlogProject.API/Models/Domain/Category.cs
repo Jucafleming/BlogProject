@@ -9,6 +9,8 @@
 
         public String UrlHandle { get; set; }
 
+        public ICollection<BlogPost> BlogPosts { get; set; }
+
 
     }
 }
