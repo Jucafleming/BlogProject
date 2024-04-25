@@ -1,4 +1,6 @@
-﻿namespace BlogProject.API.Models.Domain
+﻿using BlogProject.API.Models.DTO;
+
+namespace BlogProject.API.Models.Domain
 {
     public class BlogPost
     {

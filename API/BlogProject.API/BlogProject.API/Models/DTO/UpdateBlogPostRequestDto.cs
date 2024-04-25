@@ -1,9 +1,7 @@
 ﻿namespace BlogProject.API.Models.DTO
 {
-    public class BlogPostDto
+    public class UpdateBlogPostRequestDto
     {
-        public Guid Id { get; set; }
-
         public String Title { get; set; }
 
         public String ShortDescription { get; set; }
@@ -20,6 +18,6 @@
 
         public bool IsVisible { get; set; }
 
-        public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
+        public List<Guid> Categories { get; set; } = new List<Guid>();
     }
 }
